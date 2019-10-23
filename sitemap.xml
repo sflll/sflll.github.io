@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://sflll.github.io/categories/book/</loc>
+    <lastmod>2019-10-24T01:17:34+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sflll.github.io/categories/</loc>
     <lastmod>2019-10-24T01:17:34+08:00</lastmod>
   </url>
@@ -23,17 +28,7 @@
   </url>
   
   <url>
-    <loc>https://sflll.github.io/categories/subcategory/</loc>
-    <lastmod>2019-10-24T01:17:34+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://sflll.github.io/tags/tag1/</loc>
-    <lastmod>2019-10-24T01:17:34+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sflll.github.io/tags/tag2/</loc>
     <lastmod>2019-10-24T01:17:34+08:00</lastmod>
   </url>
   
