@@ -311,12 +311,66 @@
 </article>
 
           
+            
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://sflll.github.io/post/">
+          
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="0001-01-01T00:00:00Z">
+        
+  January 1, 1
+
+      </time>
+    
+    
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        Linux exploit的第一篇分享 Exploit Education上的題目：Stack-six，
+如果是新手從前面做題目下來，應該都會小卡一陣子吧 XD..
+https://exploit.education/phoenix/stack-six/
+Code Analysis 先來看一下程式碼
+ 有一個地方是原題漏掉的，不知道大家看到有沒有覺得奇怪  char *what = GREET; 那這個GREET是什麼東東
+後來發現漏掉一行程式碼： #define GREET “Welcome, I am pleased to meet you“
+ //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD
+      
+      <p>
+        <a href="https://sflll.github.io/post/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+          
           
 
         </section>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 sflll. All Rights Reserved
+    &copy; 2020 sflll. All Rights Reserved
   </span>
 </footer>
 

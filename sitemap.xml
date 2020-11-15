@@ -63,6 +63,11 @@
   </url>
   
   <url>
+    <loc>https://sflll.github.io/post/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sflll.github.io/archives/</loc>
   </url>
   
