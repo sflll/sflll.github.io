@@ -14,7 +14,7 @@ https://exploit.education/phoenix/stack-six/
 Code Analysis 先來看一下程式碼
  有一個地方是原題漏掉的，不知道大家看到有沒有覺得奇怪  char *what = GREET; 那這個GREET是什麼東東
 後來發現漏掉一行程式碼： #define GREET “Welcome, I am pleased to meet you“
- //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
+ //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在最多127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
 
 
 <meta property="og:description" content="Linux exploit的第一篇分享 Exploit Education上的題目：Stack-six，
@@ -23,7 +23,7 @@ https://exploit.education/phoenix/stack-six/
 Code Analysis 先來看一下程式碼
  有一個地方是原題漏掉的，不知道大家看到有沒有覺得奇怪  char *what = GREET; 那這個GREET是什麼東東
 後來發現漏掉一行程式碼： #define GREET “Welcome, I am pleased to meet you“
- //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
+ //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在最多127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SINFU LIN&#39;s blog">
 <meta name="twitter:title" content="SINFU LIN&#39;s blog">
@@ -36,14 +36,14 @@ https://exploit.education/phoenix/stack-six/
 Code Analysis 先來看一下程式碼
  有一個地方是原題漏掉的，不知道大家看到有沒有覺得奇怪  char *what = GREET; 那這個GREET是什麼東東
 後來發現漏掉一行程式碼： #define GREET “Welcome, I am pleased to meet you“
- //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
+ //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在最多127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
 <meta name="twitter:description" content="Linux exploit的第一篇分享 Exploit Education上的題目：Stack-six，
 如果是新手從前面做題目下來，應該都會小卡一陣子吧 XD..
 https://exploit.education/phoenix/stack-six/
 Code Analysis 先來看一下程式碼
  有一個地方是原題漏掉的，不知道大家看到有沒有覺得奇怪  char *what = GREET; 那這個GREET是什麼東東
 後來發現漏掉一行程式碼： #define GREET “Welcome, I am pleased to meet you“
- //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
+ //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在最多127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
 <meta property="og:locale" content="en-us">
 
   
@@ -282,7 +282,7 @@ if (NULL == ptr) {
 <li><code>env | grep ExploitEducation</code></li>
 </ul></li>
 
-<li><pre><code class="language-c">// 這段程式碼將maxSize大小限制在127
+<li><pre><code class="language-c">// 這段程式碼將maxSize大小限制在最多127
 char buffer[128];
 int maxSize;
 maxSize = strlen(who);
@@ -301,6 +301,33 @@ if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) {
 <p><code>strcpy()</code> 將GREET message複製至buffer，<code>strncpy()</code>再將who的127 bytes複製至已放入GREET message的buffer中</p>
 
 <p>來驗證一下是不是這樣：</p>
+
+<pre><code>  disas greet
+  break *greet+128   //strncpy()
+  run // breakpoint hit strncpy()
+  
+  gef&gt; x/ni
+  
+  gef&gt; x/32xg $rsp
+  0x7fffffffe4d0: 0x00007ffff7ffc948      0x00007fffffffef03
+  0x7fffffffe4e0: 0x2c656d6f636c6557      0x6c70206d61204920 //buffer start here, greet message is 0x22 bytes
+  0x7fffffffe4f0: 0x6f74206465736165      0x6f79207465656d20 
+  0x7fffffffe500: 0x6162616161612075      0x6164616161636161 //total 127 bytes env was copied to buffer
+  0x7fffffffe510: 0x6166616161656161      0x6168616161676161
+  0x7fffffffe520: 0x616a616161696161      0x616c6161616b6161
+  0x7fffffffe530: 0x616e6161616d6161      0x61706161616f6161
+  0x7fffffffe540: 0x6172616161716161      0x6174616161736161
+  0x7fffffffe550: 0x6176616161756161      0x6178616161776161
+  0x7fffffffe560: 0x617a616161796161      0x6163626161626261
+  0x7fffffffe570: 0x6165626161646261      0x6167626161666261
+  0x7fffffffe580: 0x00007fffffffe561      0x00000000004007e9 //rbp point to 0x7fffffffe580
+  0x7fffffffe590: 0x00007fffffffe608      0x00000001ffffe618
+  0x7fffffffe5a0: 0x000000000040079b      0x00007fffffffef03
+  0x7fffffffe5b0: 0x0000000000000001      0x00007ffff7d8fd62
+  0x7fffffffe5c0: 0x0000000000000000      0x00007fffffffe600
+</code></pre>
+
+<p>用GDB 跑起來看的確是127 bytes被複製到buffer中！</p>
 
               
             </div>
