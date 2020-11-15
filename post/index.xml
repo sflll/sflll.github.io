@@ -30,11 +30,11 @@
     </item>
     
     <item>
-      <title></title>
-      <link>https://sflll.github.io/post/</link>
+      <title>Phoenix: stack-six</title>
+      <link>https://sflll.github.io/post/phoenix-stack-six/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://sflll.github.io/post/</guid>
+      <guid>https://sflll.github.io/post/phoenix-stack-six/</guid>
       <description>Linux exploit的第一篇分享 Exploit Education上的題目：Stack-six，
 如果是新手從前面做題目下來，應該都會小卡一陣子吧 XD..
 https://exploit.education/phoenix/stack-six/

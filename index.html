@@ -328,8 +328,8 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://sflll.github.io/post/">
-          
+        <a class="link-unstyled" href="https://sflll.github.io/post/phoenix-stack-six/">
+          Phoenix: stack-six
         </a>
       </h1>
       
@@ -342,6 +342,14 @@
       </time>
     
     
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://sflll.github.io/categories/sec">Sec</a>
+    
+  
+
   </div>
 
     </div>
@@ -356,7 +364,7 @@ Code Analysis 先來看一下程式碼
  //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在最多127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD
       
       <p>
-        <a href="https://sflll.github.io/post/" class="postShorten-excerpt_link link">Continue reading</a>
+        <a href="https://sflll.github.io/post/phoenix-stack-six/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>

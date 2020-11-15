@@ -7,33 +7,51 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.59.0 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="sflll">
-<meta name="keywords" content="sec">
-<meta name="description" content="hello">
+<meta name="keywords" content="security">
+<meta name="description" content="Linux exploit的第一篇分享 Exploit Education上的題目：Stack-six，
+如果是新手從前面做題目下來，應該都會小卡一陣子吧 XD..
+https://exploit.education/phoenix/stack-six/
+Code Analysis 先來看一下程式碼
+ 有一個地方是原題漏掉的，不知道大家看到有沒有覺得奇怪  char *what = GREET; 那這個GREET是什麼東東
+後來發現漏掉一行程式碼： #define GREET “Welcome, I am pleased to meet you“
+ //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在最多127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
 
 
-<meta property="og:description" content="hello">
+<meta property="og:description" content="Linux exploit的第一篇分享 Exploit Education上的題目：Stack-six，
+如果是新手從前面做題目下來，應該都會小卡一陣子吧 XD..
+https://exploit.education/phoenix/stack-six/
+Code Analysis 先來看一下程式碼
+ 有一個地方是原題漏掉的，不知道大家看到有沒有覺得奇怪  char *what = GREET; 那這個GREET是什麼東東
+後來發現漏掉一行程式碼： #define GREET “Welcome, I am pleased to meet you“
+ //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在最多127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Helloworld">
-<meta name="twitter:title" content="Helloworld">
-<meta property="og:url" content="https://sflll.github.io/post/helloworld/">
-<meta property="twitter:url" content="https://sflll.github.io/post/helloworld/">
+<meta property="og:title" content="Phoenix: stack-six">
+<meta name="twitter:title" content="Phoenix: stack-six">
+<meta property="og:url" content="https://sflll.github.io/post/phoenix-stack-six/">
+<meta property="twitter:url" content="https://sflll.github.io/post/phoenix-stack-six/">
 <meta property="og:site_name" content="SINFU LIN&#39;s blog">
-<meta property="og:description" content="hello">
-<meta name="twitter:description" content="hello">
+<meta property="og:description" content="Linux exploit的第一篇分享 Exploit Education上的題目：Stack-six，
+如果是新手從前面做題目下來，應該都會小卡一陣子吧 XD..
+https://exploit.education/phoenix/stack-six/
+Code Analysis 先來看一下程式碼
+ 有一個地方是原題漏掉的，不知道大家看到有沒有覺得奇怪  char *what = GREET; 那這個GREET是什麼東東
+後來發現漏掉一行程式碼： #define GREET “Welcome, I am pleased to meet you“
+ //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在最多127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
+<meta name="twitter:description" content="Linux exploit的第一篇分享 Exploit Education上的題目：Stack-six，
+如果是新手從前面做題目下來，應該都會小卡一陣子吧 XD..
+https://exploit.education/phoenix/stack-six/
+Code Analysis 先來看一下程式碼
+ 有一個地方是原題漏掉的，不知道大家看到有沒有覺得奇怪  char *what = GREET; 那這個GREET是什麼東東
+後來發現漏掉一行程式碼： #define GREET “Welcome, I am pleased to meet you“
+ //這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit ptr = getenv(&quot;ExploitEducation&quot;); if (NULL == ptr) { // This style of comparison prevents issues where you may accidentally // type if(ptr = NULL) {}.. errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;); }   沒的話就給一個吧： export ExploitEducation= $(cyclic 140) env | grep ExploitEducation  // 這段程式碼將maxSize大小限制在最多127 char buffer[128]; int maxSize; maxSize = strlen(who); if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) { maxSize = sizeof(buffer) - 1; }  有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2019-10-23T23:55:14">
-  
-  
-    <meta property="article:modified_time" content="2019-10-23T23:55:14">
   
   
   
     
       <meta property="article:section" content="Sec">
-    
-      <meta property="article:section" content="Life">
     
   
   
@@ -55,14 +73,14 @@
   <meta property="twitter:image" content="https://www.gravatar.com/avatar/fc0c3cf9f421f0cb98591c22b92e0aab?s=640">
 
 
-    <title>Helloworld</title>
+    <title>Phoenix: stack-six</title>
 
     <link rel="icon" href="https://sflll.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://sflll.github.io/post/helloworld/">
+    <link rel="canonical" href="https://sflll.github.io/post/phoenix-stack-six/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -212,15 +230,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Helloworld
+      Phoenix: stack-six
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-10-23T23:55:14&#43;08:00">
+      <time itemprop="datePublished" datetime="0001-01-01T00:00:00Z">
         
-  October 23, 2019
+  January 1, 1
 
       </time>
     
@@ -229,9 +247,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="https://sflll.github.io/categories/sec">Sec</a>, 
-    
-      <a class="category-link" href="https://sflll.github.io/categories/life">Life</a>
+      <a class="category-link" href="https://sflll.github.io/categories/sec">Sec</a>
     
   
 
@@ -241,7 +257,89 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>hello</p>
+              
+
+<p>Linux exploit的第一篇分享 Exploit Education上的題目：Stack-six，</p>
+
+<p>如果是新手從前面做題目下來，應該都會小卡一陣子吧 XD..</p>
+
+<p><a href="https://exploit.education/phoenix/stack-six/">https://exploit.education/phoenix/stack-six/</a></p>
+
+<h3 id="code-analysis">Code Analysis</h3>
+
+<p>先來看一下程式碼</p>
+
+<ul>
+<li>有一個地方是原題漏掉的，不知道大家看到有沒有覺得奇怪</li>
+</ul>
+
+<p><code>char *what = GREET;</code>  那這個<code>GREET</code>是什麼東東</p>
+
+<p>後來發現漏掉一行程式碼： <code>#define GREET “Welcome, I am pleased to meet you“</code></p>
+
+<ul>
+<li><pre><code class="language-c">//這段程式碼驗證有沒有 ExploitEducation的環境變數，沒的話則exit 
+ptr = getenv(&quot;ExploitEducation&quot;);
+if (NULL == ptr) {
+  // This style of comparison prevents issues where you may accidentally
+  // type if(ptr = NULL) {}..
+  errx(1, &quot;Please specify an environment variable called ExploitEducation&quot;);
+}
+  
+</code></pre>
+
+<ul>
+<li>沒的話就給一個吧：</li>
+<li><code>export ExploitEducation= $(cyclic 140)</code></li>
+<li><code>env | grep ExploitEducation</code></li>
+</ul></li>
+
+<li><pre><code class="language-c">// 這段程式碼將maxSize大小限制在最多127
+char buffer[128];
+int maxSize;
+maxSize = strlen(who);
+if (maxSize &gt; (sizeof(buffer) - /* ensure null termination */ 1)) {
+  maxSize = sizeof(buffer) - 1;
+}
+</code></pre></li>
+
+<li><p>有問題的程式碼在哪邊？？ 有sense的觀眾應該猜得到跟下面兩行有關XD</p></li>
+</ul>
+
+<p><code>strcpy(buffer, what);</code></p>
+
+<p><code>strncpy(buffer + strlen(buffer), who, maxSize);</code></p>
+
+<p><code>strcpy()</code> 將GREET message複製至buffer，<code>strncpy()</code>再將who的127 bytes複製至已放入GREET message的buffer中</p>
+
+<p>來驗證一下是不是這樣：</p>
+
+<pre><code>  disas greet
+  break *greet+128   //strncpy()
+  run // breakpoint hit strncpy()
+  
+  gef&gt; x/ni
+  
+  gef&gt; x/32xg $rsp
+  0x7fffffffe4d0: 0x00007ffff7ffc948      0x00007fffffffef03
+  0x7fffffffe4e0: 0x2c656d6f636c6557      0x6c70206d61204920 //buffer start here, greet message is 0x22 bytes
+  0x7fffffffe4f0: 0x6f74206465736165      0x6f79207465656d20 
+  0x7fffffffe500: 0x6162616161612075      0x6164616161636161 //total 127 bytes env was copied to buffer
+  0x7fffffffe510: 0x6166616161656161      0x6168616161676161
+  0x7fffffffe520: 0x616a616161696161      0x616c6161616b6161
+  0x7fffffffe530: 0x616e6161616d6161      0x61706161616f6161
+  0x7fffffffe540: 0x6172616161716161      0x6174616161736161
+  0x7fffffffe550: 0x6176616161756161      0x6178616161776161
+  0x7fffffffe560: 0x617a616161796161      0x6163626161626261
+  0x7fffffffe570: 0x6165626161646261      0x6167626161666261
+  0x7fffffffe580: 0x00007fffffffe561      0x00000000004007e9 //rbp point to 0x7fffffffe580
+  0x7fffffffe590: 0x00007fffffffe608      0x00000001ffffe618
+  0x7fffffffe5a0: 0x000000000040079b      0x00007fffffffef03
+  0x7fffffffe5b0: 0x0000000000000001      0x00007ffff7d8fd62
+  0x7fffffffe5c0: 0x0000000000000000      0x00007fffffffe600
+</code></pre>
+
+<p>用GDB 跑起來看的確是127 bytes被複製到buffer中！</p>
 
               
             </div>
@@ -257,7 +355,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://sflll.github.io/post/test/" data-tooltip="Test">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://sflll.github.io/post/helloworld/" data-tooltip="Helloworld">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -265,7 +363,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://sflll.github.io/post/phoenix-stack-six/" data-tooltip="Phoenix: stack-six">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -315,7 +413,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://sflll.github.io/post/test/" data-tooltip="Test">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://sflll.github.io/post/helloworld/" data-tooltip="Helloworld">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -323,7 +421,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://sflll.github.io/post/phoenix-stack-six/" data-tooltip="Phoenix: stack-six">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>

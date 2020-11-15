@@ -63,12 +63,11 @@
   </url>
   
   <url>
-    <loc>https://sflll.github.io/post/</loc>
-    <priority>0</priority>
+    <loc>https://sflll.github.io/archives/</loc>
   </url>
   
   <url>
-    <loc>https://sflll.github.io/archives/</loc>
+    <loc>https://sflll.github.io/post/phoenix-stack-six/</loc>
   </url>
   
 </urlset>
